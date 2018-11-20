@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.css">
+    <!-- My stylesheet -->
+    <link rel="stylesheet" href="~/css/styles.css">
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-md bg-danger navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img class="brand-image" src="~/img/logo2.png" width="60" alt="Recipe book" /> Recipe Book</a>
+            <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link @ViewBag.Data" asp-controller="Recipe" asp-action="DataPage">Recipes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @ViewBag.Insert" asp-controller="Recipe" asp-action="New">Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Review" asp-action="Admin">User</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="pt-4">
+        @RenderBody()
+    </section>
+    <section>
+        <div class="container-fluid bg-danger p-2 text-center text-light fixed-bottom">&copy;Copyright 2018</div>
+    </section>
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/js/rating.js"></script>
+
+</body>
+</html>
