@@ -12,41 +12,54 @@
 else
 {
     <div class="container text-center my-5">
-        <h1 class="py-3">
-            @Model?.RecipeName
-        </h1>
-        <p>
-            <span class="rating">
-                @for (int i = 1; i <= 5; i++)
-                {
-                    var starClass = "star";
-                    if (Model.Rating == 6 - i)
-                    {
-                        starClass += " active";
-                    }
-                    <span data-value="@(6 - i)" class="@starClass"></span>
-                }
-            </span>
-        </p>
+
         <div class="row">
             <div class="col-12">
                 <div class="card align-text-top">
-                    <div class="buttons btn-group">
-                        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-RecipeID="@Model.RecipeID">Edit</a>
-                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-RecipeID="@Model.RecipeID">Delete</a>
+                    
+                    <div class="container-fluid">
+                        <div class="row p-2">
+                            <div class="col-sm-12 col-md-5 text-center">
+                                <img class="img-fluid rounded" src="@Model?.PictureUrl" alt="@Model?.RecipeName">
+
+
+                            </div>
+                            <div class="col-sm-12 col-md-7 text-center">
+                                <h5>@Model?.Description</h5>
+                                @if(Model.Reviews.Count > 0) { 
+                                <p>
+                                    <span class="rating">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            var starClass = "star";
+                                            if (Model.Rating == 6 - i)
+                                            {
+                                                starClass += " active";
+                                            }
+                                            <span data-value="@(6 - i)" class="@starClass"></span>
+                                        }
+                                    </span>
+                                </p>
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 my-4">
+                                <h6 class="text-left">Ingredients</h6>
+                                <p class="card-text text-left">
+                                    @Model?.Ingredients
+                                </p>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <h6 class="text-left">Instructions</h6>
+                                <p class="card-text text-left">
+                                    @Model?.PrepareMode
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <img class="card-img-top" src="@Model?.PictureUrl" alt="@Model?.RecipeName">
-                    <div class="card-body">
-                        <h5>@Model?.Description</h5>
-                        <h6 class="text-left">Ingredients</h6>
-                        <p class="card-text text-left">
-                            @Model?.Ingredients
-                        </p>
-                        <h6 class="text-left">Instructions</h6>
-                        <p class="card-text text-left">
-                            @Model?.PrepareMode
-                        </p>
-                    </div>
+                    
+                    
                     <div class="card-footer">
                         <p class="text-muted text-left">
                             @Model?.TimeToPrepare minutes

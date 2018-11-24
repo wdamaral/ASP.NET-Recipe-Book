@@ -8,24 +8,44 @@
 <div class="container text-center my-5">
     @if (TempData["message"] != null)
     {
-    <div class="alert alert-success">@TempData["message"]</div>
+        <div class="alert alert-success">@TempData["message"]</div>
     }
-    <div class="row my-4">
-        @foreach (Recipe recipe in Model)
-        {
-        <div class="row my-4">
 
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <img class="img-thumbnail" src="@recipe.PictureUrl" alt="@recipe.RecipeName" />
-            </div>
-            <div class="col-lg-4 col-lg-4 col-sm-4">
-                <p class="text-left">@recipe.Description</p>
-            </div>
-            <div class="col-lg-2 col-lg-2 col-sm-2">
-                <a asp-controller="Review" asp-route-RecipeID="@recipe.RecipeID" asp-action="AddReview" class="btn btn-outline-info">Add review</a>
+    @if (Model.Any())
+    {
+        <div class="row my-4">
+            <div class="col-12 text-center">
+                <table class="table table-responsive ">
+                    @foreach (Recipe recipe in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img class="img-thumbnail" src="@recipe.PictureUrl" alt="@recipe.RecipeName" />
+                            </td>
+                            <td>
+                                <p class="text-left">@recipe.Description</p>
+                            </td>
+                            <td>
+
+                                <div class="buttons btn-group">
+                                    <a asp-controller="Review" asp-route-RecipeID="@recipe.RecipeID"
+                                       asp-action="AddReview" class="btn btn-outline-info">Add review</a>
+                                    <a class="btn btn-outline-warning" asp-controller="Recipe" asp-action="Edit" asp-route-RecipeID="@recipe.RecipeID">Edit</a>
+                                    <a class="btn btn-outline-danger" asp-controller="Recipe" asp-action="Delete" asp-route-RecipeID="@recipe.RecipeID">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
             </div>
         </div>
-        }
-
-    </div>
+    }
+    else
+    {
+        <div class="row my-4">
+            <div class="col-12 text-center">
+                <h4>No recipes added.</h4>
+            </div>
+        </div>
+    }
 </div>

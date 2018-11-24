@@ -68,7 +68,7 @@ namespace Wagner_DAmaral_Assignment01
 
                 routes.MapRoute(
                     name: null,
-                    template: "Recipes/Edit/{RecipeId:int}",
+                    template: "Recipes/Edit/{RecipeId:int?}",
                     defaults: new { controller = "Recipe", action = "Edit" }
                     );
 
@@ -99,6 +99,7 @@ namespace Wagner_DAmaral_Assignment01
                     );
 
                 routes.MapRoute(name: null, template: "Recipes/{action}/{id?}");
+                routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
             });
             SeedData.EnsurePopulated(app);
         }

@@ -45,7 +45,8 @@ namespace Wagner_DAmaral_Assignment01.Models
         public Recipe DeleteRecipe(int recipeID)
         {
             Recipe dbEntry = context.Recipes
-            .FirstOrDefault(r => r.RecipeID == recipeID);
+                .Include(r => r.Reviews)
+                .FirstOrDefault(r => r.RecipeID == recipeID);
             if (dbEntry != null)
             {
                 context.Recipes.Remove(dbEntry);

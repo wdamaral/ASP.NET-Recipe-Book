@@ -34,7 +34,7 @@ namespace Wagner_DAmaral_Assignment01.Controllers
             {
                 repository.SaveRecipe(recipe);
                 TempData["message"] = $"{recipe.RecipeName} has been saved";
-                return RedirectToAction("DataPage");
+                return View("DataPage", repository.Recipes);
             }
             else
             {

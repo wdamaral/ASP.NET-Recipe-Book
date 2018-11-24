@@ -40,25 +40,20 @@ namespace Wagner_DAmaral_Assignment01.Controllers
             return View("Edit", reviewViewModel);
         }
         [HttpPost]
-        public IActionResult AddReview(int recipeId, Review review)
+        public IActionResult AddReview(ReviewViewModel reviewViewModel)
         {
                 
                 if (ModelState.IsValid)
                 {
-                    Recipe recipe = _recipeRepository.Recipes.FirstOrDefault(r => r.RecipeID == recipeId);
+                    Recipe recipe = _recipeRepository.Recipes.FirstOrDefault(r => r.RecipeID == reviewViewModel.RecipeID);
 
-                    recipe.AddReview(review);
-                    _reviewRepository.SaveReview(review);
+                    recipe.AddReview(reviewViewModel.Review);
+                    _reviewRepository.SaveReview(reviewViewModel.Review);
                     TempData["message"] = $"Your review has been saved";
                     return RedirectToAction("Admin");
                 }
                 else
                 {
-                ReviewViewModel reviewViewModel = new ReviewViewModel()
-                {
-                        RecipeID = recipeId,
-                        Review = review
-                    };
                     // there is something wrong with the data values
                     return View("Edit", reviewViewModel);
                 }

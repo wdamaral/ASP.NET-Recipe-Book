@@ -7,12 +7,34 @@
     background-color: #fee;
 }
 
+a, a:hover{
+    color: crimson; 
+}
+
+td .img-thumbnail {
+    max-width: 120px;
+}
+
+.img-fluid {
+    max-height: 250px;
+}
+
+.myCard {
+    min-height: 450px;
+}
+
+.card-body {
+    display: inline-block;
+}
 .rating {
     unicode-bidi: bidi-override;
     direction: rtl;
     font-size: 20px;
 }
-
+    
+.rating span.star.hand {
+    cursor: pointer;
+}
     .rating span.star, .rating span.star {
         font-weight: normal;
         font-style: normal;

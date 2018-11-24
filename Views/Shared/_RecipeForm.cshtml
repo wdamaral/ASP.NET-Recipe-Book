@@ -1,36 +1,36 @@
 ﻿@model Recipe
 
-    <form asp-action="Edit" method="post">
+    <form asp-controller="Recipe" asp-action="Edit" method="post">
         <input type="hidden" asp-for="RecipeID" />
         <div class="form-group">
             <label asp-for="PictureUrl">Recipe name</label>
-            <input type="url" class="form-control" id="picture" asp-for="PictureUrl" placeholder="Picture URL">
+            <input class="form-control" asp-for="PictureUrl" placeholder="Picture URL">
             <small><span class="text-danger" asp-validation-for="PictureUrl"></span></small>
 
         </div>
         <div class="form-group">
             <label asp-for="RecipeName">Recipe name</label>
-            <input type="text" class="form-control" id="name" asp-for="RecipeName" placeholder="Recipe name">
+            <input class="form-control" asp-for="RecipeName" placeholder="Recipe name">
             <small><span class="text-danger" asp-validation-for="RecipeName"></span></small>
         </div>
         <div class="form-group">
             <label asp-for="Description">Description</label>
-            <input type="text" class="form-control" id="description" asp-for="Description" placeholder="Recipe description" maxlength="140">
+            <input class="form-control" asp-for="Description" placeholder="Recipe description" maxlength="140">
             <small><span class="text-danger" asp-validation-for="Description"></span></small>
         </div>
         <div class="form-group">
             <label asp-for="TimeToPrepare">Cooking time</label>
-            <input type="number" class="form-control" id="time" value="0" asp-for="TimeToPrepare">
+            <input type="number" class="form-control" asp-for="TimeToPrepare">
             <small><span class="text-danger" asp-validation-for="TimeToPrepare"></span></small>
         </div>
         <div class="form-group">
             <label asp-for="Ingredients">Indredients</label>
-            <textarea class="form-control" id="indredients" rows="3" asp-for="Ingredients" placeholder="Indredients"></textarea>
+            <textarea class="form-control" rows="3" asp-for="Ingredients" placeholder="Indredients"></textarea>
             <small><span class="text-danger" asp-validation-for="Ingredients"></span></small>
         </div>
         <div class="form-group">
             <label asp-for="PrepareMode">Cooking mode</label>
-            <textarea class="form-control" id="preparation" rows="3" asp-for="PrepareMode" placeholder="Cooking mode"></textarea>
+            <textarea class="form-control" rows="3" asp-for="PrepareMode" placeholder="Cooking mode"></textarea>
             <small><span class="text-danger" asp-validation-for="PrepareMode"></span></small>
         </div>
         <div class="btn-group" role="group">

@@ -12,7 +12,7 @@
                         <span class="rating">
                             @for (int i = 1; i <= 5; i++)
                             {
-                                var starClass = "star";
+                                var starClass = "star hand";
                                 if (Model.Review?.Stars == 6 - i)
                                 {
                                     starClass += " active";
@@ -20,17 +20,16 @@
                                 <span data-value="@(6 - i)" class="@starClass" id="@i"></span>
                             }
                         </span>
-                        <input type="hidden" asp-for="Review.Stars" />
+                        <input type="hidden" asp-for="Review.Stars" /><br/>
                         <small><span class="text-danger" asp-validation-for="@Model.Review.Stars"></span></small>
                     </div>
                 <div class="form-group">
                     <label asp-for="@Model.Review.Description" class="control-label"></label>
                     <input asp-for="@Model.Review.Description" class="form-control" />
-                    <span asp-validation-for="@Model.Review.Description" class="text-danger"></span>
                     <small><span class="text-danger" asp-validation-for="@Model.Review.Description"></span></small>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Save" class="btn btn-outline-success" />
                 </div>
             </form>
         </div>

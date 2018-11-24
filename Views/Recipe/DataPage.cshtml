@@ -6,11 +6,11 @@
 
 
 <div class="container text-center my-5">
-    <h1 class="py-3">Recipe list</h1>
     @if (TempData["message"] != null)
     {
         <div class="alert alert-success">@TempData["message"]</div>
     }
+    @if(Model.Any()) { 
     <div class="row my-4">
         @foreach (Recipe recipe in Model)
         {
@@ -20,13 +20,15 @@
             @:<div class="row my-4">
             }
 
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="card">
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
+                <div class="card myCard">
                     <img class="card-img-top" src="@recipe.PictureUrl" alt="@recipe.RecipeName">
                     <div class="card-body">
-                        <h5 class="card-title">@recipe.RecipeName</h5>
+                        <h5 class="card-title">
+                            <a asp-action="DisplayPage" asp-route-RecipeID="@recipe.RecipeID">@recipe.RecipeName</a>
+                        </h5>
                         <p class="card-text">@recipe.Description</p>
-                        <a asp-action="DisplayPage" asp-route-RecipeID="@recipe.RecipeID" class="btn btn-outline-danger">See details</a>
+                        
                     </div>
                     <div class="card-footer">
                         <span class="text-muted">Cooking time: @recipe.TimeToPrepare minutes</span>
@@ -37,5 +39,14 @@
 
             counter++;
         }
-    </div>
+            </div>
+    } else
+    {
+        <div class="row my-4">
+            <div class="col-12 text-center">
+                <h4>No recipes added.</h4>
+            </div>
+        </div>
+    }
 </div>
+    
