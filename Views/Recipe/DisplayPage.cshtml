@@ -1,112 +1,143 @@
 ﻿@model Recipe
 @{
-    ViewBag.Title = "Display page";
+    ViewBag.Title = Model.RecipeName;
 }
 
-@if (Model == null)
-{
-    <div class="container text-center my-5">
-        <h2>No recipe selected</h2>
-    </div>
-}
-else
-{
-    <div class="container text-center my-5">
+<div class="bg-light pt-4">
+    @if (Model == null)
+    {
+        <div class="container text-center my-5">
+            <h2>No recipe selected</h2>
+        </div>
+    }
+    else
+    {
+        <div class="container text-center my-5">
 
-        <div class="row">
-            <div class="col-12">
-                <div class="card align-text-top">
-                    
-                    <div class="container-fluid">
-                        <div class="row p-2">
-                            <div class="col-sm-12 col-md-5 text-center">
-                                <img class="img-fluid rounded" src="@Model?.PictureUrl" alt="@Model?.RecipeName">
+            <div class="row">
+                <div class="col" style="max-width:800px; margin:auto">
+                    <div class="card align-text-top">
 
+                        <div class="container-fluid">
+                            <div class="row p-2">
+                                <div class="col-sm-12 col-md-5 text-center">
+                                    <img class="img-fluid rounded" src="@Model?.PictureUrl" alt="@Model?.RecipeName">
+
+                                </div>
+                                <div class="col-sm-12 col-md-7 text-left">
+                                    <p class="text-body font-weight-bold">@Model?.Description</p>
+                                    @if (Model.Reviews.Count > 0)
+                                    {
+                                        <p>
+                                            <span class="rating">
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    var starClass = "star";
+                                                    if ((int)Model.Rating == 6 - i)
+                                                    {
+                                                        starClass += " active";
+                                                    }
+                                                    <span data-value="@(6 - i)" class="@starClass"></span>
+                                                }
+                                            </span>
+                                        </p>
+                                    }
+                                    <small class="text-black-50">Created at: @Model.DateAdded.ToLongDateString()</small>
+                                    <br />
+                                    @if (Model.LastEdit != null)
+                                    {
+                                    <small class="text-black-50">Edited at: @Model.LastEdit?.ToLongDateString()</small>
+                                    }
+                                </div>
 
                             </div>
-                            <div class="col-sm-12 col-md-7 text-center">
-                                <h5>@Model?.Description</h5>
-                                @if(Model.Reviews.Count > 0) { 
-                                <p>
-                                    <span class="rating">
-                                        @for (int i = 1; i <= 5; i++)
-                                        {
-                                            var starClass = "star";
-                                            if (Model.Rating == 6 - i)
-                                            {
-                                                starClass += " active";
-                                            }
-                                            <span data-value="@(6 - i)" class="@starClass"></span>
-                                        }
-                                    </span>
-                                </p>
-                                }
+                            <div class="row">
+                                <div class="col-12 my-4">
+                                    <h6 class="text-left">Ingredients</h6>
+                                    <p class="card-text text-left">
+                                        @Model?.Ingredients
+                                    </p>
+                                </div>
+                                <div class="col-12 mb-4">
+                                    <h6 class="text-left">Instructions</h6>
+                                    <p class="text-left">
+                                        @Model?.PrepareMode
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12 my-4">
-                                <h6 class="text-left">Ingredients</h6>
-                                <p class="card-text text-left">
-                                    @Model?.Ingredients
-                                </p>
-                            </div>
-                            <div class="col-12 mb-4">
-                                <h6 class="text-left">Instructions</h6>
-                                <p class="card-text text-left">
-                                    @Model?.PrepareMode
-                                </p>
-                            </div>
+
+
+                        <div class="card-footer">
+                            <p class="text-muted text-left">
+                                Time to cook: @Model?.TimeToPrepare minutes
+                            </p>
                         </div>
-                    </div>
-                    
-                    
-                    <div class="card-footer">
-                        <p class="text-muted text-left">
-                            @Model?.TimeToPrepare minutes
-                        </p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row my-4">
-            <div class="col-12 text-center">
-                <h3>Reviews</h3>
-            </div>
+        <div class="container-fluid bg-dark mb-4 text-light">
+            <div class="container py-3">
+                <div class="row">
+                    <h2 class="w-100 pb-2 cborder text-light">
+                        <strong class="text-success">Reviews</strong>
+                    </h2>
+                </div>
+                <div class="row py-3 text-center">
 
-            <table class="table table-striped">
-                <tbody>
-                    @if(Model.Reviews.Count == 0)
-                    {
-                    <tr>
-                        <td colspan="2">No reviews were added.</td>
-                    </tr>
-                    }
-                    else
-                    { 
-                    foreach (Review review in Model.Reviews)
-                    {
+                    <table class="table table-borderless">
+                        <tbody>
+                            @if (Model.Reviews.Count == 0)
+                            {
+                                <tr>
+                                    <td colspan="3">No reviews were added.</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">Be the first and click <a class="text-success" asp-action="AddReview" asp-controller="Review" asp-route-RecipeID="@Model.RecipeID"> here</a></td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (Review review in Model.Reviews)
+                                {
 
-                        <tr>
-                            <td>
-                                <span class="rating">
-                                    @for (int i = 1; i <= 5; i++)
+                                    <tr>
+                                        <td>
+                                            <span class="rating">
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    var starClass = "star";
+                                                    if (review.Stars == 6 - i)
+                                                    {
+                                                        starClass += " active";
+                                                    }
+                                                    <span data-value="@(6 - i)" class="@starClass"></span>
+                                                }
+                                            </span>
+                                        </td>
+                                        <td class="text-left">@review.Description</td>
+                                        <td class="text-left">
+                                            @review.DateAdded.ToLongDateString()
+                                    </td>
+                                    @if (User.Identity.IsAuthenticated)
                                     {
-                                        var starClass = "star";
-                                        if (review.Stars == 6 - i)
-                                        {
-                                            starClass += " active";
-                                        }
-                                        <span data-value="@(6 - i)" class="@starClass"></span>
+                                        <td>
+                                            <a class="btn btn-sm btn-outline-warning"
+                                               asp-action="EditReview" asp-route-ReviewID="@review.ReviewID" asp-controller="Review"><i class="fa fa-edit"></i></a>
+                                        </td>
                                     }
-                                </span>
-                            </td>
-                            <td class="text-left">@review.Description</td>
-                        </tr>
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="3">Click <a class="text-success" asp-action="AddReview" asp-controller="Review" asp-route-RecipeID="@Model.RecipeID"> here </a>to a new review.</td>
+                            </tr>
                         }
-                    }
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-</div>
 
-}
+        }
+</div>

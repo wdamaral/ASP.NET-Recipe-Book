@@ -1,4 +1,25 @@
-﻿.brand-image {
+﻿/*INDEX*/
+.cborder {
+    background-repeat: repeat-x;
+    background-position: bottom center;
+    background-image: url("../img/pat-border.png");
+}
+.card img {
+    align-self:center;
+}
+.recipe {
+    margin: 0 -15px;
+    background-repeat: repeat-x;
+    background-position: top center,bottom center;
+    background-image: url("../img/pattern-gray.png"), url("../img/pattern-gray.png");
+}
+/*END*/
+
+hr.dotted {
+    background-color: #fff;
+    border-top: 2px dotted #8c8b8b;
+}
+.brand-image {
     transform:rotate(-10deg);
 }
 
@@ -19,13 +40,6 @@ td .img-thumbnail {
     max-height: 250px;
 }
 
-.myCard {
-    min-height: 450px;
-}
-
-.card-body {
-    display: inline-block;
-}
 .rating {
     unicode-bidi: bidi-override;
     direction: rtl;
@@ -52,3 +66,10 @@ td .img-thumbnail {
             color: #ffd800;
             content: "★";
         }
+
+.myCard {
+    min-height:350px;
+}
+.card .text-body {
+    font-size: 13px;
+}

@@ -1,0 +1,23 @@
+﻿@model LoginModel
+@{
+    ViewBag.Title = "Log In";
+}
+
+<div class="my-5">
+            <div class=" text-center card p-4 border-0 bg-dark text-light" style="margin:auto;max-width: 400px;">
+                <div class="text-danger" asp-validation-summary="All"></div>
+                <form asp-action="Login" asp-controller="Account" method="post">
+                    <input type="hidden" asp-for="ReturnUrl" />
+                    <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
+                    <label asp-for="Name" class="sr-only">Username</label>
+                    <input asp-for="Name" class="mb-3 form-control" placeholder="Username" required autofocus>
+                    <div><span asp-validation-for="Name" class="text-danger"></span></div>
+                    <label asp-for="Password" class="sr-only">Password</label>
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Password" required>
+                    <div><span asp-validation-for="Password" class="text-danger"></span></div>
+
+                    <button class="my-2 btn btn-danger btn-block" type="submit">Log in</button>
+                </form>
+            </div>
+        </div>
+    

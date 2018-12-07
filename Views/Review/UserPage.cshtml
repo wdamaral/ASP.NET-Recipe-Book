@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<Recipe>
 @{
     ViewBag.Title = "User page";
-    ViewBag.Data = "active";
 }
 
 
@@ -10,42 +9,53 @@
     {
         <div class="alert alert-success">@TempData["message"]</div>
     }
+    @if (TempData["errorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["errorMessage"]</div>
+    }
 
     @if (Model.Any())
     {
         <div class="row my-4">
-            <div class="col-12 text-center">
-                <table class="table table-responsive ">
-                    @foreach (Recipe recipe in Model)
-                    {
-                        <tr>
-                            <td>
-                                <img class="img-thumbnail" src="@recipe.PictureUrl" alt="@recipe.RecipeName" />
-                            </td>
-                            <td>
-                                <p class="text-left">@recipe.Description</p>
-                            </td>
-                            <td>
-
-                                <div class="buttons btn-group">
-                                    <a asp-controller="Review" asp-route-RecipeID="@recipe.RecipeID"
-                                       asp-action="AddReview" class="btn btn-outline-info">Add review</a>
-                                    <a class="btn btn-outline-warning" asp-controller="Recipe" asp-action="Edit" asp-route-RecipeID="@recipe.RecipeID">Edit</a>
-                                    <a class="btn btn-outline-danger" asp-controller="Recipe" asp-action="Delete" asp-route-RecipeID="@recipe.RecipeID">Delete</a>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </table>
+            <div class="col-12 text-black-50">
+                <h3>Recipes you have added.</h3>
             </div>
         </div>
+            <div class="row my-4">
+                <div class="col-12 text-center">
+                        <table class="table">
+                            @foreach (Recipe recipe in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img class="img-thumbnail" src="@recipe.PictureUrl" alt="@recipe.RecipeName" />
+                                    </td>
+                                    <td>
+                                        <p class="text-left">@recipe.Description</p>
+                                    </td>
+                                    <td>
+                                        <div class="row"> 
+                                            <a class="mr-1 btn btn-outline-warning" asp-controller="Recipe"
+                                               asp-action="Edit" asp-route-RecipeID="@recipe.RecipeID"><i class="fa fa-pencil"></i></a>
+                                            <form asp-controller="Recipe" asp-action="Delete" asp-route-RecipeID="@recipe.RecipeID" method="post">
+                                                <button class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    
+                </div>
+            </div>
     }
     else
     {
-        <div class="row my-4">
-            <div class="col-12 text-center">
-                <h4>No recipes added.</h4>
-            </div>
+    <div class="row my-4">
+        <div class="col-12 text-center">
+            <h4>No recipes added.</h4>
+            <p class="text-body">Click <a asp-action="New" asp-controller="Recipe">here</a> to add your first recipe.</p>
         </div>
+    </div>
     }
-</div>
+        </div>

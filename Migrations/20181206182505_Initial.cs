@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Wagner_DAmaral_Assignment01.Migrations
@@ -13,13 +14,16 @@ namespace Wagner_DAmaral_Assignment01.Migrations
                 {
                     RecipeID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(nullable: true),
                     PictureUrl = table.Column<string>(nullable: false),
                     RecipeName = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(maxLength: 140, nullable: false),
+                    Description = table.Column<string>(nullable: false),
                     Ingredients = table.Column<string>(nullable: false),
                     TimeToPrepare = table.Column<int>(nullable: false),
                     PrepareMode = table.Column<string>(nullable: false),
-                    Rating = table.Column<int>(nullable: false)
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    LastEdit = table.Column<DateTime>(nullable: true),
+                    Rating = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,7 +36,9 @@ namespace Wagner_DAmaral_Assignment01.Migrations
                 {
                     ReviewID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(nullable: true),
                     Stars = table.Column<double>(nullable: false),
+                    DateAdded = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: false),
                     RecipeID = table.Column<int>(nullable: true)
                 },

@@ -1,9 +1,11 @@
 ﻿@model Recipe
 
+<div style="margin:auto;max-width:600px;">
+
     <form asp-controller="Recipe" asp-action="Edit" method="post">
         <input type="hidden" asp-for="RecipeID" />
         <div class="form-group">
-            <label asp-for="PictureUrl">Recipe name</label>
+            <label asp-for="PictureUrl">Picture Url</label>
             <input class="form-control" asp-for="PictureUrl" placeholder="Picture URL">
             <small><span class="text-danger" asp-validation-for="PictureUrl"></span></small>
 
@@ -24,8 +26,8 @@
             <small><span class="text-danger" asp-validation-for="TimeToPrepare"></span></small>
         </div>
         <div class="form-group">
-            <label asp-for="Ingredients">Indredients</label>
-            <textarea class="form-control" rows="3" asp-for="Ingredients" placeholder="Indredients"></textarea>
+            <label asp-for="Ingredients">Ingredients</label>
+            <textarea class="form-control" rows="3" asp-for="Ingredients" placeholder="Ingredients"></textarea>
             <small><span class="text-danger" asp-validation-for="Ingredients"></span></small>
         </div>
         <div class="form-group">
@@ -38,3 +40,4 @@
             <a asp-controller="Home" asp-action="Index" class="btn btn-outline-danger">Cancel</a>
         </div>
     </form>
+</div>

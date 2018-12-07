@@ -8,6 +8,7 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.css">
+    <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <!-- My stylesheet -->
     <link rel="stylesheet" href="~/css/styles.css">
 
@@ -25,12 +26,24 @@
                     <li class="nav-item">
                         <a class="nav-link @ViewBag.Data" asp-controller="Recipe" asp-action="DataPage">Recipes</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link @ViewBag.Insert" asp-controller="Recipe" asp-action="New">Create</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Review" asp-action="Admin">User</a>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link @ViewBag.Insert" asp-controller="Recipe" asp-action="New">Create</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Review" asp-action="Admin">My Recipes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

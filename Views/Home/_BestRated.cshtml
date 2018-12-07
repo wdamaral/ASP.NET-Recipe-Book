@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Recipe>
+
+
+<div class="container">
+    <div class="row">
+        <h2 class="w-100 pb-2 cborder">
+            What's <strong class="text-success">Hot</strong>
+        </h2>
+    </div>
+    <div class="row py-3">
+        @foreach (var recipe in Model)
+        {
+            <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+                <div class="card border-0">
+                    <img class="border p-2" style="max-height: 150px; max-width: 200px;"
+                         src="@recipe.PictureUrl" alt="@recipe.RecipeName">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            @{
+                                var stgLength = recipe.RecipeName.ToString().Length;
+
+                                <a asp-action="DisplayPage"
+                                   asp-controller="Recipe"
+                                   asp-route-RecipeID="@recipe.RecipeID"
+                                   class="card-link">@recipe.RecipeName.ToString().Substring(0, @stgLength < 20 ? @stgLength : 20)...</a>
+                            }
+                        </h6>
+                        <p class="card-text text-left">
+                            @recipe.Description.ToString().Substring(0,50)
+                            <a asp-action="DisplayPage"
+                               asp-controller="Recipe"
+                               asp-route-RecipeID="@recipe.RecipeID"
+                               class="card-link"> more...</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

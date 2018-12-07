@@ -4,49 +4,57 @@
     int counter = 0;
 }
 
-
-<div class="container text-center my-5">
-    @if (TempData["message"] != null)
-    {
-        <div class="alert alert-success">@TempData["message"]</div>
-    }
-    @if(Model.Any()) { 
-    <div class="row my-4">
-        @foreach (Recipe recipe in Model)
+<div class="container-fluid bg-light mt-4">
+    <div class="container text-center py-4">
+        @if (TempData["message"] != null)
         {
-            if (counter != 0 && counter % 3 == 0)
-            {
-            @:</div>
-            @:<div class="row my-4">
-            }
-
-            <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
-                <div class="card myCard">
-                    <img class="card-img-top" src="@recipe.PictureUrl" alt="@recipe.RecipeName">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a asp-action="DisplayPage" asp-route-RecipeID="@recipe.RecipeID">@recipe.RecipeName</a>
-                        </h5>
-                        <p class="card-text">@recipe.Description</p>
-                        
-                    </div>
-                    <div class="card-footer">
-                        <span class="text-muted">Cooking time: @recipe.TimeToPrepare minutes</span>
-                    </div>
-                </div>
-
-            </div>
-
-            counter++;
+            <div class="alert alert-success">@TempData["message"]</div>
         }
+        @if (Model.Any())
+        {
+            <div class="row my-4">
+                @foreach (Recipe recipe in Model)
+                {
+                    if (counter != 0 && counter % 4 == 0)
+                    {
+                    @:</div>
+                    @:<div class="row my-4">
+                    }
+
+                    <div class="col-lg-3 col-md-4 col-sm-12 my-3">
+                        <div class="card border-0 myCard bg-white pt-2">
+                            <img class="border p-2" style="max-height: 150px; max-width: 200px;"
+                                 src="@recipe.PictureUrl" alt="@recipe.RecipeName">
+                            <div class="card-body">
+                                <h6 class="card-title">
+                                    <a asp-action="DisplayPage" asp-route-RecipeID="@recipe.RecipeID">@recipe.RecipeName.ToString().Substring(0, recipe.RecipeName.ToString().Length > 25 ? 25 : recipe.RecipeName.ToString().Length)...</a>
+                                </h6>
+                                <p class="card-text d-md-none d-lg-block">
+                                    @{
+                                        @recipe.Description.ToString().Substring(0, recipe.Description.ToString().Length > 50 ? 50 : recipe.Description.ToString().Length) <br />
+                                        <a asp-action="DisplayPage" asp-route-RecipeID="@recipe.RecipeID">Read more...</a>
+                                            }
+                                    </p>
+
+                            </div>
+                            <div class="card-footer bg-white">
+                                <span class="text-muted">Cooking time: @recipe.TimeToPrepare minutes</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    counter++;
+                }
             </div>
-    } else
-    {
-        <div class="row my-4">
-            <div class="col-12 text-center">
-                <h4>No recipes added.</h4>
+        }
+        else
+        {
+            <div class="row my-4">
+                <div class="col-12 text-center">
+                    <h4>No recipes added.</h4>
+                </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
-    

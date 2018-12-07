@@ -10,7 +10,7 @@ using Wagner_DAmaral_Assignment01.Models;
 namespace Wagner_DAmaral_Assignment01.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181120205836_Initial")]
+    [Migration("20181206182505_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,12 +27,15 @@ namespace Wagner_DAmaral_Assignment01.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DateAdded");
+
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(140);
+                        .IsRequired();
 
                     b.Property<string>("Ingredients")
                         .IsRequired();
+
+                    b.Property<DateTime?>("LastEdit");
 
                     b.Property<string>("PictureUrl")
                         .IsRequired();
@@ -40,12 +43,14 @@ namespace Wagner_DAmaral_Assignment01.Migrations
                     b.Property<string>("PrepareMode")
                         .IsRequired();
 
-                    b.Property<int>("Rating");
+                    b.Property<double>("Rating");
 
                     b.Property<string>("RecipeName")
                         .IsRequired();
 
                     b.Property<int>("TimeToPrepare");
+
+                    b.Property<string>("UserId");
 
                     b.HasKey("RecipeID");
 
@@ -58,12 +63,16 @@ namespace Wagner_DAmaral_Assignment01.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DateAdded");
+
                     b.Property<string>("Description")
                         .IsRequired();
 
                     b.Property<int?>("RecipeID");
 
                     b.Property<double>("Stars");
+
+                    b.Property<string>("UserId");
 
                     b.HasKey("ReviewID");
 
